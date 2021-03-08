@@ -50,11 +50,10 @@ function load() {
                 thisIDElmt.innerText = artID;
 
                 artTitleElmt.value = response.data.title;
-                artClassElmt.value = response.data.class;
                 detailElmt.innerHTML = "create_time:" + response.data.create_time + "<br>update_time:" + response.data.update_time;
 
-                contentElmt.value = response.data.md;
-                viewElmt.innerHTML = marked(response.data.md, { breaks: true });
+                contentElmt.value = response.data.content;
+                viewElmt.innerHTML = marked(response.data.content, { breaks: true });
             } else {
                 alert(response.message);
             }
