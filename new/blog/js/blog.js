@@ -52,11 +52,10 @@ function GetUser() {
                 profileP.innerText = response.data.profile;
             } else {
                 alert(response.message);
-                return 1
             }
         })
         .catch(error => console.log('error', error));
-    return 0
+    return 
 }
 
 function GetArtArr() {
@@ -93,11 +92,10 @@ function GetArtArr() {
 
             } else {
                 alert(response.message);
-                return 1
             }
         })
         .catch(error => console.log('error', error));
-    return 0
+    return 
 }
 
 function main() {
@@ -105,9 +103,8 @@ function main() {
         alert("未指定用户");
         return 
     }
-    if(GetUser()==0) {
-        GetArtArr();
-    }
+    GetUser();
+    GetArtArr();
 }
 
 main();
