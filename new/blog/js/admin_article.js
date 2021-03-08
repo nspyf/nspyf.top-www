@@ -101,7 +101,7 @@ document.getElementById("commit").onclick = function() {
             body: raw
         };
 
-        fetch(API + "/article", requestOptions)
+        fetch(API + "/auth/article", requestOptions)
             .then(response => response.json())
             .then((response) => {
                 if (response.code == 0) {
@@ -135,7 +135,7 @@ document.getElementById("commit").onclick = function() {
             body: raw
         };
 
-        fetch(API + "/article?id=" + artID, requestOptions)
+        fetch(API + "/auth/article?id=" + artID, requestOptions)
             .then(response => response.json())
             .then((response) => {
                 if (response.code == 0) {
