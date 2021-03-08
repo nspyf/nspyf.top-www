@@ -1,7 +1,7 @@
 var API = "https://nspyf.top:10001";
 
 var artBorder = document.getElementById("artBorder");
-var nicknameSpan = document.getElementById("nickname");
+var nicknameoBJ = document.getElementById("nickname");
 var profileP = document.getElementById("profile");
 var id;
 
@@ -23,13 +23,16 @@ function FirstParam(name) {
 }
 
 function CheckID() {
-    id = FirstParam(id)
+    id = FirstParam("id")
     if(id == "") {
         id = localStorage.getItem("user_id");
         if (id == null) {
-            return
+            return 0
+        } else {
+            window.location.href = ".?id="+id;
         }
     }
+    return 1
 }
 
 function GetUser() {
@@ -45,7 +48,7 @@ function GetUser() {
         .then(response => response.json())
         .then((response) => {
             if (response.code == 0) {
-                nicknameSpan.innerText = response.data.nickname;
+                nicknameoBJ.innerText = response.data.nickname;
                 profileP.innerText = response.data.profile;
             } else {
                 alert(response.message);
@@ -95,7 +98,10 @@ function GetArtArr() {
 }
 
 function main() {
-    CheckID();
+    if(!CheckID()) {
+        alert("未指定用户");
+        return 
+    }
     GetUser();
     GetArtArr();
 }
