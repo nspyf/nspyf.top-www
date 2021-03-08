@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="../../style/markdown.css" type="text/css" rel="stylesheet">
+    <link href="../../style/admin_article.css" type="text/css" rel="stylesheet">
+    <script src="../../js/admin_article.js" type="text/javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <title>文章</title>
+</head>
+
+<body>
+    <div id="border">
+        <textarea id="content" class="text" placeholder="编辑区"></textarea>
+        <div id="view" class="showData">预览区</div>
+        <div id="detailBorder">
+            <h3>文章ID：<span id="thisID"></span></h3>
+            <div id="thisTitle" class="showData"></div>
+            <h3>其他信息</h3>
+            <div id="detail" class="showData">暂无</div>
+            <h3>设置/修改标题</h3>
+            <textarea id="artTitle" class="text"></textarea>
+            <h3>设置/修改分类</h3>
+            <textarea id="artClass" class="text"></textarea>
+        </div>
+    </div>
+    <div id="buttonBorder">
+        <a id="commit" class="button" href="javascript:;">提交</a>
+        <a id="toView" class="button" href="javascript:;">预览</a>
+        <a id="return" class="button" href="../">返回</a>
+    </div>
+</body>
+
+</html>
