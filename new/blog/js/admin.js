@@ -16,16 +16,16 @@ function main() {
         headers: myHeaders,
     };
 
-    fetch(API + "/article/user?id=" + string(id), requestOptions)
+    fetch(API + "/article/user?id=" + id, requestOptions)
         .then(response => response.json())
         .then((response) => {
-            if (response.code = 0) {
+            if (response.code == 0) {
                 artBorder.innerText = "";
                 articleLen = response.data.length;
 
                 for (i = articleLen - 1; i >= 0; i--) {
                     newA = document.createElement("a");
-                    newA.href = "./article?id=" + string(response.data[i].id);
+                    newA.href = "./article?id=" + response.data[i].id;
                     newA.className = "yellowBlock";
                     newA.innerText = response.data[i].title;
                     artBorder.appendChild(newA);
