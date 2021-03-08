@@ -1,0 +1,13 @@
+blockquote {
+    background: #f5f5f5;
+    border-left: 6px solid #ccc;
+    padding-left: 14px;
+    padding-right: 14px;
+    margin: 0px;
+}
+
+pre {
+    background: #f5f5f5;
+    border-left: 6px solid #ccc;
+    padding: 14px;
+}
