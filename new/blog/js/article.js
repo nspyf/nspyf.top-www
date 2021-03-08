@@ -1,5 +1,5 @@
 var API = "https://nspyf.top:10001";
-s
+
 var titleElmt = document.getElementById("title");
 var detailElmt = document.getElementById("detail");
 var viewElmt = document.getElementById("view");
@@ -40,7 +40,7 @@ function load() {
             if (response.code == 0) {
                 titleElmt.innerHTML = response.data.title;
                 detailElmt.innerHTML = "create_time:" + response.data.create_time + "<br>update_time:" + response.data.update_time;
-                viewElmt.innerHTML = marked(response.data.md, { breaks: true });
+                viewElmt.innerHTML = marked(response.data.content, { breaks: true });
             } else {
                 alert(response.message);
             }

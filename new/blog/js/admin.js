@@ -26,8 +26,13 @@ function main() {
                 for (i = articleLen - 1; i >= 0; i--) {
                     newA = document.createElement("a");
                     newA.href = "./article?id=" + response.data[i].id;
-                    newA.className = "yellowBlock";
-                    newA.innerText = response.data[i].title;
+                    newA.className = "yellowBlock center";
+                    title = document.createElement("p");
+                    title.innerText = response.data[i].title;
+                    newA.appendChild(title)
+                    ab = document.createElement("p");
+                    ab.innerText = response.data[i].abstract;
+                    newA.appendChild(ab)
                     artBorder.appendChild(newA);
 
                     newBr = document.createElement("br");
