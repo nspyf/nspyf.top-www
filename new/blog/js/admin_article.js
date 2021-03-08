@@ -78,7 +78,7 @@ document.getElementById("commit").onclick = function() {
         return
     }
 
-    artID = GetUrlParam("id");
+    artID = FirstParam("id");
     if (artID == "") {
 
         choose = confirm("确认创建文章");
