@@ -153,7 +153,7 @@ document.getElementById("toView").onclick = function() {
 }
 
 window.onbeforeunload = function() {
-    return "是否要离开编辑页面？请确保想保存数据已提交";
+    return "";
 }
 
 function setTime() {
