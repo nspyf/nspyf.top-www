@@ -72,9 +72,9 @@ function GetArtArr() {
         .then((response) => {
             if (response.code == 0) {
                 artBorder.innerText = "";
-                articleLen = response.data.length;
+                l = response.data.length;
 
-                for (i = articleLen - 1; i >= 0; i--) {
+                for (i=0;i<l;i++) {
                     newA = document.createElement("a");
                     newA.href = "./article?id=" + response.data[i].id;
                     newA.className = "yellowBlock center";
