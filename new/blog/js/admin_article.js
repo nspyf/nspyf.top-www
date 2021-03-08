@@ -32,6 +32,7 @@ function load() {
     if (artID == "") {
         thisTitleElmt.innerText = "新文章";
         thisIDElmt.innerText = "undefined";
+        return ;
     }
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
