@@ -27,12 +27,12 @@ function CheckID() {
     if(id == "") {
         id = localStorage.getItem("user_id");
         if (id == null) {
-            return 0
+            return 1
         } else {
             window.location.href = ".?id="+id;
         }
     }
-    return 1
+    return 0
 }
 
 function GetUser() {
@@ -54,7 +54,11 @@ function GetUser() {
                 alert(response.message);
             }
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+            console.log('error', error);
+            return 1
+        });
+    return 0
 }
 
 function GetArtArr() {
@@ -98,12 +102,13 @@ function GetArtArr() {
 }
 
 function main() {
-    if(!CheckID()) {
+    if(CheckID()!=0) {
         alert("未指定用户");
         return 
     }
-    GetUser();
-    GetArtArr();
+    if(GetUser()==0) {
+        GetArtArr();
+    }
 }
 
 main();
