@@ -52,12 +52,10 @@ function GetUser() {
                 profileP.innerText = response.data.profile;
             } else {
                 alert(response.message);
+                return 1
             }
         })
-        .catch(error => {
-            console.log('error', error);
-            return 1
-        });
+        .catch(error => console.log('error', error));
     return 0
 }
 
@@ -95,10 +93,11 @@ function GetArtArr() {
 
             } else {
                 alert(response.message);
+                return 1
             }
         })
         .catch(error => console.log('error', error));
-    return;
+    return 0
 }
 
 function main() {
