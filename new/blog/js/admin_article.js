@@ -10,7 +10,7 @@ var thisIDElmt = document.getElementById("thisID");
 
 var interval = 1000;
 
-function GetUrlFirstParam(name) {
+function FirstParam(name) {
     var url = document.location.toString();
     var arr = url.split("?");
     if (arr.length > 1) {
@@ -28,7 +28,7 @@ function GetUrlFirstParam(name) {
 }
 
 function load() {
-    artID = GetUrlParam("id");
+    artID = FirstParam("id");
     if (artID == "") {
         thisTitleElmt.innerText = "新文章";
         thisIDElmt.innerText = "undefined";

@@ -4,7 +4,7 @@ var titleElmt = document.getElementById("title");
 var detailElmt = document.getElementById("detail");
 var viewElmt = document.getElementById("view");
 
-function GetUrlFirstParam(name) {
+function FirstParam(name) {
     var url = document.location.toString();
     var arr = url.split("?");
     if (arr.length > 1) {
@@ -22,7 +22,7 @@ function GetUrlFirstParam(name) {
 }
 
 function load() {
-    artID = GetUrlParam("id");
+    artID = FirstParam("id");
     if (artID == "") {
         alert("未指定文章")
         return 
