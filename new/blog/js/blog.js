@@ -96,7 +96,7 @@ function GetArtArr() {
                     title = document.createElement("h1");
                     title.innerText = response.data[i].title;
                     newA.appendChild(title)
-                    ab = document.createElement("h1");
+                    ab = document.createElement("p");
                     ab.innerHTML = marked(response.data[i].abstract, { breaks: true });
                     newA.appendChild(ab)
                     artBorder.appendChild(newA);
