@@ -4,6 +4,7 @@ var artBorder = document.getElementById("artBorder");
 var nicknameoBJ = document.getElementById("nickname");
 var profileP = document.getElementById("profile");
 var id;
+var page;
 
 function FirstParam(name) {
     var url = document.location.toString();
@@ -58,6 +59,20 @@ function GetUser() {
     return 
 }
 
+document.getElementById("prePage").onclick = function() {
+    if(page==1) {
+        alert("没有上一页啦")
+        return
+    }
+    page=page-1
+    GetArtArr()
+}
+
+document.getElementById("nextPage").onclick = function() {
+    page=page+1
+    GetArtArr()
+}
+
 function GetArtArr() {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -67,7 +82,7 @@ function GetArtArr() {
         headers: myHeaders,
     };
 
-    fetch(API + "/article/user?id=" + id, requestOptions)
+    fetch(API + "/article/user?id=" + id + "&page=" + page, requestOptions)
         .then(response => response.json())
         .then((response) => {
             if (response.code == 0) {
@@ -104,6 +119,7 @@ function main() {
         return 
     }
     GetUser();
+    page=1;
     GetArtArr();
 }
 
