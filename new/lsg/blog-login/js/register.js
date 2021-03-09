@@ -68,11 +68,51 @@
 */
 
 //注册
+
+//提示用户正确输入
+
+    var usr=document.getElementById("username")
+    var pad=document.getElementsByClassName("password")
+    var span=document.getElementsByTagName("span")
+
+
+var usrRexp=/[A-z0-9]{2,}/
+usr.oninput=function(){
+    if(usrRexp.test(usr.value)){
+        span[0].innerText=""
+
+    }
+    else{
+    
+        span[0].innerText="用户名至少两位，可以是字母或数字"
+    }
+}
+pad[0].oninput=function(){
+    if(pad[0].value.length<8|pad[0].value.length>32){
+        span[1].innerText="密码至少为8位，至多为32位"
+    }
+    else{
+        span[1].innerText=""
+    }
+
+}
+pad[1].oninput=function(){
+    if(pad[0].value==pad[1].value){
+        span[2].innerText=""
+
+    }
+    else{
+        span[2].innerText="两次输入密码不相同"
+    }
+    
+}
     
 var API="https://nspyf.top:10000"
 document.getElementById("register").onclick=function(){
     username=document.getElementById("username").value;
     password=document.getElementsByClassName("password")[0].value;
+    
+    
 
   var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
