@@ -93,10 +93,10 @@ function GetArtArr() {
                     newA = document.createElement("a");
                     newA.href = "./article?id=" + response.data[i].id;
                     newA.className = "yellowBlock center";
-                    title = document.createElement("p");
+                    title = document.createElement("h1");
                     title.innerText = response.data[i].title;
                     newA.appendChild(title)
-                    ab = document.createElement("p");
+                    ab = document.createElement("h1");
                     ab.innerHTML = marked(response.data[i].abstract, { breaks: true });
                     newA.appendChild(ab)
                     artBorder.appendChild(newA);
