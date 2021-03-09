@@ -29,7 +29,7 @@ document.getElementById("login").onclick=function(){
         .then((response) => {
             if (response.code == 0) {
                 alert("登录成功");
-                window.location.href = ".../blog";
+                window.location.href = "../../blog";
             } else {
                 alert("请求错误:" + response.message);
             }
