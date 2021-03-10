@@ -18,7 +18,8 @@ body>* {
 }
 
 .border>*,
-.center>* {
+.center>*,
+.raw {
     margin: 3px;
 }
 
