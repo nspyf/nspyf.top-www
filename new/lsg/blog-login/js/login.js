@@ -28,11 +28,21 @@ document.getElementById("login").onclick=function(){
         .then(response => response.json())
         .then((response) => {
             if (response.code == 0) {
+                localStorage.setItem("token", response.data.token)
+                localStorage.setItem("username", response.data.username)
+                localStorage.setItem("user_id", response.data.id)
                 alert("登录成功");
-                window.location.href = "../blog";
+                window.location.href = "../blog";//例外：地址是根据上一层index.html的地址的
             } else {
                 alert("请求错误:" + response.message);
             }
         })
         .catch(error => console.log('error', error));
+       
+}
+document.getElementById("exit").onclick = function() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("user_id");
+    alert("登录状态已清空");
 }
