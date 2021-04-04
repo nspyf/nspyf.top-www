@@ -99,7 +99,7 @@ document.getElementById("ask").onclick = function() {
 }
 
 document.getElementById("respond").onclick = function() {
-    token = localStorage.getItem("nspyfToken");
+    token = localStorage.getItem("token");
     if (token == null) {
         alert("未登陆，无权限操作");
         return
@@ -144,7 +144,7 @@ document.getElementById("respond").onclick = function() {
 }
 
 document.getElementById("delete").onclick = function() {
-    token = localStorage.getItem("nspyfToken");
+    token = localStorage.getItem("token");
     if (token == null) {
         alert("未登陆，无权限操作");
         return
@@ -157,7 +157,6 @@ document.getElementById("delete").onclick = function() {
 
     var id;
     var router;
-
     if (optionQ != "-1") {
         choose = confirm("删除问题：" + optionQData);
         if (choose == false) {
