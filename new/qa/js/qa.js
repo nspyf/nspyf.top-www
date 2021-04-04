@@ -1,4 +1,4 @@
-var API = "https://nspyf.top:779";
+var API = "https://nspyf.top:10002";
 var optionQ = "-1";
 var optionA = "-1";
 var optionQData;
@@ -30,10 +30,10 @@ function loadView() {
         method: 'GET',
     };
 
-    fetch(API + "/information?user=" + GetUrlParam("user"), requestOptions)
+    fetch(API + "/information?id=" + GetUrlParam("id"), requestOptions)
         .then(response => response.json())
         .then((response) => {
-            if (response.status == "1") {
+            if (response.code == 0) {
                 if (response.data[0] == undefined) {
                     viewObj.innerText = "还没有人给TA提问";
                 } else {
@@ -62,7 +62,7 @@ function loadView() {
                     }
                 }
             } else {
-                alert("请求错误:" + response.message);
+                alert(response.message);
             }
         })
         .catch(error => console.log('error', error));
@@ -75,7 +75,7 @@ document.getElementById("ask").onclick = function() {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-        "username": GetUrlParam("user"),
+        "user_id": GetUrlParam("id"),
         "data": content
     });
 
@@ -88,11 +88,11 @@ document.getElementById("ask").onclick = function() {
     fetch(API + "/question", requestOptions)
         .then(response => response.json())
         .then((response) => {
-            if (response.status == "1") {
+            if (response.code == 0) {
                 loadView();
                 alert("提问成功");
             } else {
-                alert("请求错误:" + response.message);
+                alert(response.message);
             }
         })
         .catch(error => console.log('error', error));
@@ -130,14 +130,14 @@ document.getElementById("respond").onclick = function() {
         body: raw
     };
 
-    fetch(API + "/user/answer", requestOptions)
+    fetch(API + "/auth/answer", requestOptions)
         .then(response => response.json())
         .then((response) => {
-            if (response.status == "1") {
+            if (response.code == 0) {
                 loadView();
                 alert("回复成功")
             } else {
-                alert("请求错误:" + response.message + ".token过期请退出重新登录");
+                alert(response.message);
             }
         })
         .catch(error => console.log('error', error));
@@ -191,14 +191,14 @@ document.getElementById("delete").onclick = function() {
         body: raw
     };
 
-    fetch(API + "/user/" + router, requestOptions)
+    fetch(API + "/auth/" + router, requestOptions)
         .then(response => response.json())
         .then((response) => {
-            if (response.status == "1") {
+            if (response.code == 0) {
                 loadView();
                 alert("删除成功")
             } else {
-                alert("请求错误:" + response.message);
+                alert(response.message);
             }
         })
         .catch(error => console.log('error', error));
@@ -225,45 +225,17 @@ document.getElementById("copy").onclick = function() {
     alert("复制成功");
 }
 
-function tokenVerify() {
-    if (localStorage.getItem("nspyfToken") == null || localStorage.getItem("nspyfUsername") == null) {
-        return;
-    }
-
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Token", localStorage.getItem("nspyfToken"));
-
-    var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-    };
-
-    fetch(API + "/user/token", requestOptions)
-        .then(response => response.json())
-        .then((response) => {
-            if (response.status == "1") {
-                alert("状态：已登录。欢迎回来！");
-            } else {
-                alert("令牌错误：" + response.message + ".请重新登录");
-                return;
-            }
-        })
-        .catch(error => console.log('error', error));
-}
-
 function main() {
-    tokenVerify();
-    user = GetUrlParam("user");
-    username = localStorage.getItem("nspyfUsername");
-    if (user == "") {
-        if (username != null) {
-            window.location.href = "./?user=" + username;
+    id = GetUrlParam("id");
+    user_id = localStorage.getItem("user_id");
+    if (id == "") {
+        if (user_id != null) {
+            window.location.href = "./?id=" + user_id;
         } else {
-            window.location.href = "./?user=pyf";
+            window.location.href = "./?id=1";
         }
     }
-    if (user == username) {
+    if (user_id == id) {
         document.getElementById("respond").style.display = "flex";
         document.getElementById("delete").style.display = "flex";
     }
@@ -273,7 +245,7 @@ function main() {
     shareCopyObj = document.getElementById("shareCopy");
     shareCopyObj.innerText = window.location.toString();
     hostObj = document.getElementById("host");
-    hostObj.innerText = GetUrlParam("user");
+    hostObj.innerText = GetUrlParam(id);
 }
 
 main();
