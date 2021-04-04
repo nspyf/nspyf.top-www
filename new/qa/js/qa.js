@@ -234,6 +234,7 @@ function main() {
         } else {
             window.location.href = "./?id=1";
         }
+        return 
     }
     if (user_id == id) {
         document.getElementById("respond").style.display = "flex";
