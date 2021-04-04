@@ -1,8 +1,42 @@
-var API = "https://nspyf.top:778";
+var API = "https://nspyf.top:10001";
 
 var artBorder = document.getElementById("artBorder");
+var nicknameoBJ = document.getElementById("nickname");
+var profileP = document.getElementById("profile");
+var id;
+var page;
 
-function main() {
+function FirstParam(name) {
+    var url = document.location.toString();
+    var arr = url.split("?");
+    if (arr.length > 1) {
+        var a = arr[1].split("&");
+        for (var i = 0; i < a.length; i++) {
+            p = a[i].split("=");
+            if (p != null && p[0] == name) {
+                return p[1];
+            }
+        }
+        return "";
+    } else {
+        return "";
+    }
+}
+
+function CheckID() {
+    id = FirstParam("id")
+    if(id == "") {
+        id = localStorage.getItem("user_id");
+        if (id == null) {
+            return 1
+        } else {
+            window.location.href = ".?id="+id;
+        }
+    }
+    return 0
+}
+
+function GetUser() {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -11,18 +45,60 @@ function main() {
         headers: myHeaders,
     };
 
-    fetch(API + "/articles", requestOptions)
+    fetch(API + "/user?id=" + id, requestOptions)
         .then(response => response.json())
         .then((response) => {
-            if (response.status == "1") {
-                artBorder.innerText = "";
-                articleLen = response.data.length;
+            if (response.code == 0) {
+                nicknameoBJ.innerText = response.data.nickname;
+                profileP.innerText = response.data.profile;
+            } else {
+                alert(response.message);
+            }
+        })
+        .catch(error => console.log('error', error));
+    return 
+}
 
-                for (i = articleLen - 1; i >= 0; i--) {
+document.getElementById("prePage").onclick = function() {
+    if(page==1) {
+        alert("没有上一页啦")
+        return
+    }
+    page=page-1
+    GetArtArr()
+}
+
+document.getElementById("nextPage").onclick = function() {
+    page=page+1
+    GetArtArr()
+}
+
+function GetArtArr() {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+    };
+
+    fetch(API + "/article/user?id=" + id + "&page=" + page, requestOptions)
+        .then(response => response.json())
+        .then((response) => {
+            if (response.code == 0) {
+                artBorder.innerText = "";
+                l = response.data.length;
+
+                for (i=0;i<l;i++) {
                     newA = document.createElement("a");
-                    newA.href = "./article?article=" + response.data[i].id;
-                    newA.className = "yellowBlock";
-                    newA.innerText = response.data[i].title;
+                    newA.href = "./article?id=" + response.data[i].id;
+                    newA.className = "yellowBlock center";
+                    title = document.createElement("h1");
+                    title.innerText = response.data[i].title;
+                    newA.appendChild(title)
+                    ab = document.createElement("p");
+                    ab.innerHTML = marked(response.data[i].abstract, { breaks: true });
+                    newA.appendChild(ab)
                     artBorder.appendChild(newA);
 
                     newBr = document.createElement("br");
@@ -30,11 +106,21 @@ function main() {
                 }
 
             } else {
-                alert("请求错误:" + response.message);
+                alert(response.message);
             }
         })
         .catch(error => console.log('error', error));
-    return;
+    return 
+}
+
+function main() {
+    if(CheckID()!=0) {
+        alert("未指定用户");
+        return 
+    }
+    GetUser();
+    page=1;
+    GetArtArr();
 }
 
 main();

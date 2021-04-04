@@ -5,16 +5,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="../style/blog.css" type="text/css" rel="stylesheet">
-    <script src="../js/admin.js" type="text/javascript" defer></script>
-    <title>博客文章</title>
+    <script src="../js/blog.js" type="text/javascript" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <title>后台</title>
 </head>
 
 <body>
-    <h1>pyf的博客后台</h1>
-    <a id="return" class="blueBlock" href="../">返回博客</a>
-    <a id="newArticle" class="blueBlock" href="./article">新建文章</a>
+    <h1 id="nickname"></h1>
+    <p id="profile"></p>
+    <div class="row">
+        <a id="return" class="blueBlock" href="../">返回博客</a>
+        <a id="newArticle" class="blueBlock" href="./article">新建文章</a>
+    </div>
     <h1>文章列表</h1>
     <div id="artBorder" class="border"></div>
+    <div class="row">
+        <a id="prePage" class="blueBlock" href="javascript:;">上一页</a>
+        <a id="nextPage" class="blueBlock" href="javascript:;">下一页</a>
+    </div>
 </body>
 
 </html>

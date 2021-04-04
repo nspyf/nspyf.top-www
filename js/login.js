@@ -1,4 +1,4 @@
-var API = "https://nspyf.top:777";
+var API = "https://nspyf.top:10000";
 
 document.getElementById("login").onclick = function() {
     username = document.getElementById("username").value;
@@ -8,7 +8,7 @@ document.getElementById("login").onclick = function() {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-        "username": username,
+        "user": username,
         "password": password
     });
 
@@ -21,28 +21,31 @@ document.getElementById("login").onclick = function() {
     fetch(API + "/login", requestOptions)
         .then(response => response.json())
         .then((response) => {
-            if (response.status == "1") {
-                localStorage.setItem("nspyfToken", response.data.token)
-                localStorage.setItem("nspyfUsername", username)
+            if (response.code == 0) {
+                localStorage.setItem("token", response.data.token)
+                localStorage.setItem("username", response.data.username)
+                localStorage.setItem("user_id", response.data.id)
                 alert("登录成功");
                 window.location.href = "../"
             } else {
-                alert("请求错误:" + response.message);
+                alert(response.message);
             }
         })
         .catch(error => console.log('error', error));
 }
 
 document.getElementById("exit").onclick = function() {
-    localStorage.removeItem("nspyfToken");
-    localStorage.removeItem("nspyfUsername");
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("user_id");
     alert("登录状态已清空");
 }
 
 function tokenVerify() {
-    token = localStorage.getItem("nspyfToken")
-    username = localStorage.getItem("nspyfUsername")
-    if (token == null || username == null) {
+    token = localStorage.getItem("token");
+    username = localStorage.getItem("username");
+    id = localStorage.getItem("user_id");
+    if (token == null || username == null || id == null) {
         return;
     }
 
@@ -55,13 +58,13 @@ function tokenVerify() {
         headers: myHeaders,
     };
 
-    fetch(API + "/user/token", requestOptions)
+    fetch(API + "/auth/token", requestOptions)
         .then(response => response.json())
         .then((response) => {
-            if (response.status == "1") {
+            if (response.code == 0) {
                 alert(username + "欢迎回来！");
             } else {
-                alert("令牌错误：" + response.message + ".请重新登录");
+                alert(response.message);
                 return;
             }
         })

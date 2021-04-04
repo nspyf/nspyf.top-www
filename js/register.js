@@ -1,4 +1,4 @@
-var API = "https://nspyf.top:777";
+var API = "https://nspyf.top:10000";
 
 document.getElementById("register").onclick = function() {
     username = document.getElementById("username").value;
@@ -27,11 +27,11 @@ document.getElementById("register").onclick = function() {
     fetch(API + "/register", requestOptions)
         .then(response => response.json())
         .then((response) => {
-            if (response.status == "1") {
+            if (response.code == 0) {
                 alert("注册成功");
                 window.location.href = "../login";
             } else {
-                alert("请求错误:" + response.message);
+                alert(response.message);
             }
         })
         .catch(error => console.log('error', error));
